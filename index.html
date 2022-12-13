@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>banner通栏</title>
+    <script language="JavaScript">
+        //     window.onload = function() {
+        //     var imgs = document.getElementsByClassName('img-all');
+        //     var opa = document.querySelector('opa-all').querySelectorAll('li');
+        //     for (var i = 0;i < opa.length;i++){
+        //     opa[i].onclick = function(){
+        //         if(i=2){
+        //         document.l2.style.opacity=0.8;
+        //         }else{
+        //         document.l2.style.opacity=1; 
+        //         }L
+        //     }
+        //   }
+        // }
+            //禁止鼠标右击
+      document.oncontextmenu = function() {
+        event.returnValue = false;
+      };
+      //禁用开发者工具F12
+      document.onkeydown = document.onkeyup = document.onkeypress = function(event) {
+        let e = event || window.event || arguments.callee.caller.arguments[0];
+        if (e && e.keyCode == 123) {
+          e.returnValue = false;
+          return false;
+        }
+      };
+      let userAgent = navigator.userAgent;
+      if (userAgent.indexOf("Firefox") > -1) {
+        let checkStatus;
+        let devtools = /./;
+        devtools.toString = function() {
+          checkStatus = "on";
+        };
+        setInterval(function() {
+          checkStatus = "off";
+          console.log(devtools);
+          console.log(checkStatus);
+          console.clear();
+          if (checkStatus === "on") {
+            let target = "";
+            try {
+              window.open("about:blank", (target = "_self"));
+            } catch (err) {
+              let a = document.createElement("button");
+              a.onclick = function() {
+                window.open("about:blank", (target = "_self"));
+              };
+              a.click();
+            }
+          }
+        }, 200);
+      } else {
+        //禁用控制台
+        let ConsoleManager = {
+          onOpen: function() {
+            alert("Console is opened");
+          },
+          onClose: function() {
+            alert("Console is closed");
+          },
+          init: function() {
+            let self = this;
+            let x = document.createElement("div");
+            let isOpening = false,
+              isOpened = false;
+            Object.defineProperty(x, "id", {
+              get: function() {
+                if (!isOpening) {
+                  self.onOpen();
+                  isOpening = true;
+                }
+                isOpened = true;
+                return true;
+              }
+            });
+            setInterval(function() {
+              isOpened = false;
+              console.info(x);
+              console.clear();
+              if (!isOpened && isOpening) {
+                self.onClose();
+                isOpening = false;
+              }
+            }, 200);
+          }
+        };
+        ConsoleManager.onOpen = function() {
+          //打开控制台，跳转
+          let target = "";
+          try {
+            window.open("about:blank", (target = "_self"));
+          } catch (err) {
+            let a = document.createElement("button");
+            a.onclick = function() {
+              window.open("about:blank", (target = "_self"));
+            };
+            a.click();
+          }
+        };
+        ConsoleManager.onClose = function() {
+          alert("Console is closed!!!!!");
+        };
+        ConsoleManager.init();
+      }
+    </script>
+</head>
+<body>
+    <div class="so_big">
+    <div class="big">
+        <dl>
+            <dt>YOUDIANSHEJI</dt>
+            <dt>有点设计</dt>
+            <dt>以就业为导向</dt>
+            <dt>打造理论与实践相结合的实战型人才</dt>
+        </dl>
+        <ul class="opa-all">
+            <li class="l1"><a href="#"></a></li>
+            <li class="l2"><a href="#"></a></li>
+            <li class="l3"><a href="#"></a></li>
+            <li class="l4"><a href="#"></a></li>
+        </ul>
+        <ul class="img-all">
+            <li><img src="image/icon1.gif" alt=""></li>
+            <li><img src="image/icon2.gif" alt=""></li>
+            <li><img src="image/icon3.gif" alt=""></li>
+        </ul>
+    </div>
+    <div class="small">
+        <dl>
+            <dt>课程介绍</dt>
+            <dt>INTRODUCTION</dt>
+            <dt>
+                <img src="image/icon1.gif" alt="">
+                <img src="image/icon2.gif" alt="">
+                <img src="image/icon3.gif" alt="">
+                <img src="image/icon4.gif" alt="">
+            </dt>
+            <dt>掌握平面设计,网页设计UI设计,FLASH设计四门主流技术,让你有点设计</dt>
+        </dl>
+    </div>
+    <div class="tc2"></div>
+</div>
+</body>
+<style>
+    .img-all img{
+        display: none;
+    }
+    body{
+        padding: 0;
+        margin: 0;
+        border: 0;
+        background-color: rgb(17, 17, 70);
+    }
+    .so_big{
+        display: flex;
+        margin-top: 10%;
+        justify-content: center;
+        overflow: hidden;
+        background-color:rgb(30, 33, 73);
+        /* position: absolute;
+        left: 0;
+        top: 25%; */
+        /* transform: translate(-50%,-50%); */
+    }
+    .big{
+        width: 755px;
+        height: 280px;
+        background: url(image/pic.gif) no-repeat;
+        position: relative;
+    }
+    .big dl{
+        position: absolute;
+        top: 18%;
+        right: 5%;
+        text-align: right;
+        color: antiquewhite;
+    }
+    .big ul{
+        position: absolute;
+        bottom: 5%;
+        right: 5%;
+        list-style: none;
+        overflow: hidden;
+    }
+    .big li{
+        float: left;
+        margin-left: 10px;
+    }
+    .big li a{
+        background-color: white;
+        width: 46px;
+        height: 5px;
+        text-align: center;
+        line-height: 22px;
+        display: block;
+        font-size: 18px;
+        opacity: 0.3;
+    }
+    .big ul li.l1 a:hover {
+        opacity: 0.9;
+    }.big ul li.l2 a:hover {
+        opacity: 0.9;
+    }.big ul li.l3 a:hover {
+        opacity: 0.9;
+    }.big ul li.l4 a:hover {
+        opacity: 0.9;
+    }
+    .big ul li.l1 a:focus {
+        opacity: 0.9;
+    }.big ul li.l2 a:focus {
+        opacity: 0.9;
+    }.big ul li.l3 a:focus {
+        opacity: 0.9;
+    }.big ul li.l4 a:focus {
+        opacity: 0.9;
+    }
+    .big dl dt:nth-child(1){
+        font-size: 15px;
+        margin-bottom: 2px;
+    }
+    .big dl dt:nth-child(2){
+        font-size: 35px;
+        font-weight: bold;
+        border-right: 6px orange solid;
+        padding-right: 10px;
+    }
+    .big dl dt:nth-child(3){
+        margin-top: 20px;
+    }
+    .small{
+        width: 245px;
+        height: 280px;
+        background-color: rgb(61, 64, 103);
+    }
+    .small dl{
+        padding-left: 10%;
+        padding-right: 10%;
+    }
+    .small dl dt{
+        font-size: 14px;
+        color: antiquewhite;
+    }
+    .small dl dt img{
+        margin-right: 10px;
+    }
+    .small dl dt:nth-child(1){
+        margin-top: 40px;
+    }
+    .small dl dt:nth-child(3){
+        margin-top: 20px;
+    }
+    .small dl dt:nth-child(4){
+        margin-top: 25px;
+        line-height: 24px;
+    }
+</style>
+</html>
